@@ -7,9 +7,11 @@ A real-time monitoring system for Azure spot instance pricing, specifically trac
 - 🕐 **Real-time Monitoring**: Fetches pricing data every minute from Azure Pricing API
 - 📊 **Interactive Dashboard**: Beautiful web interface with charts and statistics
 - 🌍 **Multi-Region Support**: Monitors East US 2 and North Europe regions
-- 📈 **Historical Data**: Tracks price changes over time
+- 📈 **Historical Data**: Tracks price changes over time with GitHub persistence
 - 🆓 **Free Hosting**: Uses GitHub Pages for visualization
 - ⚡ **Serverless**: Runs as scheduled task in Choreo
+- 🔄 **Smart Persistence**: GitHub-based data storage with local fallback
+- 📱 **Read-Only Ready**: Handles containerized environments gracefully
 
 ## Architecture
 
@@ -76,7 +78,7 @@ npm start
 npm run dev
 ```
 
-## Data Collection
+## Data Collection & Persistence
 
 The service collects the following data points:
 - **retailPrice**: Current spot price per hour
@@ -85,6 +87,26 @@ The service collects the following data points:
 - **region**: Azure region (eastus2, northeurope)
 - **location**: Human-readable location name
 - **currencyCode**: Currency (USD)
+
+### Data Storage Strategy
+
+The application uses a **dual persistence approach**:
+
+1. **Primary: GitHub Repository Storage**
+   - All data is stored in `data/price-logs.json` via GitHub API
+   - Provides persistent storage across container restarts
+   - Automatically handles data accumulation and history
+   - Works in any environment (local, containerized, serverless)
+
+2. **Fallback: Local File Storage**
+   - Used for development and when GitHub storage is unavailable
+   - Automatically detects read-only filesystems and gracefully skips local writes
+   - Continues operation using GitHub persistence only
+
+3. **Read-Only Environment Support**
+   - Detects `EROFS` (read-only file system) errors
+   - Gracefully continues execution using GitHub storage
+   - Perfect for containerized deployments like Choreo
 
 ## API Endpoints
 
@@ -133,10 +155,12 @@ azure-spotnode-price-checker/
 
 ## Monitoring and Maintenance
 
-- **Data Retention**: Keeps last 24 hours of data (1440 entries)
-- **Error Handling**: Graceful handling of API failures
+- **Data Retention**: GitHub storage maintains full history, local storage keeps current run
+- **Error Handling**: Graceful handling of API failures and filesystem limitations
 - **Rate Limiting**: 1-second delay between region requests
-- **Auto-cleanup**: Old data automatically removed
+- **Auto-cleanup**: GitHub storage manages data accumulation automatically
+- **Filesystem Compatibility**: Works in both writable and read-only environments
+- **Comprehensive Logging**: Detailed console output for monitoring and debugging
 
 ## Cost Analysis
 
@@ -154,11 +178,19 @@ This solution is **completely free**:
 2. **Dashboard not updating**: Verify GitHub Pages is enabled
 3. **API rate limits**: Increase delay between requests in `src/index.js`
 4. **GitHub token issues**: Ensure token has correct permissions
+5. **Read-only filesystem errors**: Application automatically handles this - check logs for "📱 Read-only filesystem detected" messages
+6. **Local development issues**: Ensure you have write permissions to the project directory
 
 **Logs:**
 - Choreo: Check execution logs in Choreo console
 - GitHub Actions: Check workflow runs in Actions tab
 - Browser: Open developer console for client-side errors
+- Application: Look for emoji indicators in console output:
+  - 📁 Local file operations
+  - 📱 Read-only filesystem detection
+  - ✅ Successful operations
+  - ❌ Error conditions
+  - ⚠️ Warning messages
 
 ## Contributing
 
