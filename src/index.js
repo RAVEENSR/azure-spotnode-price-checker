@@ -31,8 +31,16 @@ class AzureSpotPriceChecker {
   async ensureDataDirectory() {
     try {
       await fs.access(this.dataDir);
-    } catch {
-      await fs.mkdir(this.dataDir, { recursive: true });
+      console.log(`Data directory exists: ${this.dataDir}`);
+    } catch (error) {
+      console.log(`Creating data directory: ${this.dataDir}`);
+      try {
+        await fs.mkdir(this.dataDir, { recursive: true });
+        console.log(`✅ Data directory created successfully`);
+      } catch (mkdirError) {
+        console.error(`❌ Failed to create data directory:`, mkdirError.message);
+        throw mkdirError;
+      }
     }
   }
 
@@ -78,10 +86,61 @@ class AzureSpotPriceChecker {
   }
 
   async loadExistingData() {
+    // Try to fetch existing data from GitHub first
+    const githubData = await this.fetchDataFromGitHub();
+    if (githubData.length > 0) {
+      console.log(`✅ Loaded ${githubData.length} existing entries from GitHub`);
+      return githubData;
+    }
+
+    // Fallback to local file (for development/testing)
     try {
       const data = await fs.readFile(this.logFile, 'utf8');
-      return JSON.parse(data);
+      const localData = JSON.parse(data);
+      console.log(`📁 Loaded ${localData.length} entries from local file`);
+      return localData;
     } catch {
+      console.log(`🆕 No existing data found, starting fresh`);
+      return [];
+    }
+  }
+
+  async fetchDataFromGitHub() {
+    const githubToken = process.env.GITHUB_TOKEN;
+    const githubRepo = process.env.GITHUB_REPO;
+    const githubOwner = process.env.GITHUB_OWNER;
+
+    if (!githubToken || !githubRepo || !githubOwner) {
+      console.log('GitHub credentials not configured, skipping GitHub data fetch');
+      return [];
+    }
+
+    try {
+      console.log('Fetching existing data from GitHub...');
+
+      const url = `https://api.github.com/repos/${githubOwner}/${githubRepo}/contents/data/price-logs.json`;
+      const response = await axios.get(url, {
+        headers: {
+          'Authorization': `token ${githubToken}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'Azure-Spot-Price-Checker/1.0'
+        },
+        timeout: 10000
+      });
+
+      if (response.data && response.data.content) {
+        // GitHub returns base64 encoded content
+        const content = Buffer.from(response.data.content, 'base64').toString('utf8');
+        return JSON.parse(content);
+      }
+
+      return [];
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        console.log('No existing data file found in GitHub (first run)');
+      } else {
+        console.error('Error fetching data from GitHub:', error.message);
+      }
       return [];
     }
   }
@@ -89,17 +148,10 @@ class AzureSpotPriceChecker {
   async saveData(newData) {
     await this.ensureDataDirectory();
 
-    const existingData = await this.loadExistingData();
-    existingData.push(newData);
-
-    // Keep only last 1440 entries (24 hours if running every minute)
-    const maxEntries = 1440;
-    if (existingData.length > maxEntries) {
-      existingData.splice(0, existingData.length - maxEntries);
-    }
-
-    await fs.writeFile(this.logFile, JSON.stringify(existingData, null, 2));
-    console.log(`Data saved. Total entries: ${existingData.length}`);
+    // For local development/testing, save just the current entry
+    // In production, GitHub persistence handles the accumulation
+    await fs.writeFile(this.logFile, JSON.stringify([newData], null, 2));
+    console.log(`Data saved locally for current run`);
   }
 
   async run() {
@@ -124,15 +176,19 @@ class AzureSpotPriceChecker {
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
-    await this.saveData(results);
+    // Load existing data, add new data, save locally, and push to GitHub
+    const existingData = await this.loadExistingData();
+    existingData.push(results);
 
-    // Push to GitHub if configured
-    await this.pushToGitHub(results);
+    await this.saveData(results); // Save locally for this run
+
+    // Push complete dataset to GitHub for persistence
+    await this.pushToGitHub(existingData);
 
     console.log('=== Price Check Complete ===\n');
   }
 
-  async pushToGitHub(data) {
+  async pushToGitHub(allData) {
     const githubToken = process.env.GITHUB_TOKEN;
     const githubRepo = process.env.GITHUB_REPO;
     const githubOwner = process.env.GITHUB_OWNER;
@@ -143,15 +199,65 @@ class AzureSpotPriceChecker {
     }
 
     try {
-      // This would push the data to a GitHub repository
-      // Implementation depends on your specific GitHub setup
-      console.log('Pushing data to GitHub repository...');
+      console.log('Pushing updated data to GitHub repository...');
 
-      // For now, just log the data that would be pushed
-      console.log('Data to push:', JSON.stringify(data, null, 2));
+      const filePath = 'data/price-logs.json';
+      const url = `https://api.github.com/repos/${githubOwner}/${githubRepo}/contents/${filePath}`;
+
+      // First, try to get the current file to get its SHA (required for updates)
+      let sha = null;
+      try {
+        const existingFileResponse = await axios.get(url, {
+          headers: {
+            'Authorization': `token ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'User-Agent': 'Azure-Spot-Price-Checker/1.0'
+          },
+          timeout: 10000
+        });
+        sha = existingFileResponse.data.sha;
+        console.log('Found existing file, will update it');
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          console.log('No existing file found, will create new one');
+        } else {
+          throw error;
+        }
+      }
+
+      // Prepare the content
+      const content = JSON.stringify(allData, null, 2);
+      const encodedContent = Buffer.from(content).toString('base64');
+
+      // Create or update the file
+      const requestBody = {
+        message: `Update price data: ${new Date().toISOString()}`,
+        content: encodedContent,
+        branch: 'main'
+      };
+
+      if (sha) {
+        requestBody.sha = sha; // Required for updates
+      }
+
+      const response = await axios.put(url, requestBody, {
+        headers: {
+          'Authorization': `token ${githubToken}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'Azure-Spot-Price-Checker/1.0'
+        },
+        timeout: 15000
+      });
+
+      console.log(`✅ Successfully pushed ${allData.length} entries to GitHub`);
+      console.log(`📝 Commit: ${response.data.commit.html_url}`);
 
     } catch (error) {
-      console.error('Error pushing to GitHub:', error.message);
+      console.error('❌ Error pushing to GitHub:', error.message);
+      if (error.response) {
+        console.error('Response status:', error.response.status);
+        console.error('Response data:', error.response.data);
+      }
     }
   }
 }
