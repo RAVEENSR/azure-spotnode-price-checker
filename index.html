@@ -6,6 +6,7 @@
     <title>Azure Spot Node Price Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
     <style>
         * {
             margin: 0;
@@ -121,9 +122,13 @@
             font-size: 0.9rem;
         }
 
-        .region-selector {
+        .chart-controls {
             text-align: center;
             margin-bottom: 20px;
+        }
+
+        .region-selector {
+            margin-bottom: 15px;
         }
 
         .region-selector label {
@@ -133,6 +138,30 @@
 
         .region-selector input[type="checkbox"] {
             margin-right: 5px;
+        }
+
+        .zoom-controls {
+            margin-top: 10px;
+        }
+
+        .zoom-btn {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .zoom-btn:hover {
+            background: #106ebe;
+        }
+
+        .zoom-btn:active {
+            background: #005a9e;
         }
     </style>
 </head>
@@ -160,8 +189,15 @@
             <div class="chart-container">
                 <div class="chart-header">
                     <h2>Price History</h2>
-                    <div class="region-selector" id="region-selector">
-                        <!-- Region checkboxes will be populated by JavaScript -->
+                    <div class="chart-controls">
+                        <div class="region-selector" id="region-selector">
+                            <!-- Region checkboxes will be populated by JavaScript -->
+                        </div>
+                        <div class="zoom-controls">
+                            <button onclick="resetZoom()" class="zoom-btn">Reset Zoom</button>
+                            <button onclick="zoomToLast24Hours()" class="zoom-btn">Last 24 Hours</button>
+                            <button onclick="zoomToLast7Days()" class="zoom-btn">Last 7 Days</button>
+                        </div>
                     </div>
                 </div>
                 <div class="chart-wrapper">
@@ -297,6 +333,21 @@
                         },
                         legend: {
                             position: 'top'
+                        },
+                        zoom: {
+                            zoom: {
+                                wheel: {
+                                    enabled: true,
+                                },
+                                pinch: {
+                                    enabled: true
+                                },
+                                mode: 'x',
+                            },
+                            pan: {
+                                enabled: true,
+                                mode: 'x',
+                            }
                         }
                     },
                     scales: {
@@ -306,12 +357,14 @@
                                 displayFormats: {
                                     minute: 'HH:mm',
                                     hour: 'HH:mm',
-                                    day: 'MMM DD'
+                                    day: 'MMM DD HH:mm',
+                                    week: 'MMM DD',
+                                    month: 'MMM YYYY'
                                 }
                             },
                             title: {
                                 display: true,
-                                text: 'Time'
+                                text: 'Time (Use mouse wheel to zoom, drag to pan)'
                             }
                         },
                         y: {
@@ -342,6 +395,30 @@
             });
 
             chart.update();
+        }
+
+        function resetZoom() {
+            chart.resetZoom();
+        }
+
+        function zoomToLast24Hours() {
+            const now = new Date();
+            const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+            chart.zoomScale('x', {
+                min: twentyFourHoursAgo.getTime(),
+                max: now.getTime()
+            });
+        }
+
+        function zoomToLast7Days() {
+            const now = new Date();
+            const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+            chart.zoomScale('x', {
+                min: sevenDaysAgo.getTime(),
+                max: now.getTime()
+            });
         }
 
         // Auto-refresh data every 5 minutes
