@@ -1,0 +1,12 @@
+# Choreo scheduled component configuration
+# This should be configured through the Choreo console, but here's the reference
+version: "1.0"
+type: "Schedule"
+name: "azure-spot-price-checker"
+description: "Azure spot instance price monitoring service"
+schedule: "*/1 * * * *"  # Every minute
+
+# Environment variables to be set in Choreo console:
+# GITHUB_TOKEN - Personal access token for GitHub
+# GITHUB_REPO - Repository name (e.g., azure-spotnode-price-checker)
+# GITHUB_OWNER - GitHub username/organization

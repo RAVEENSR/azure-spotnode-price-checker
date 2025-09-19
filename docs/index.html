@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Spot Node Price Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #0078d4;
+        }
+
+        .stat-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0078d4;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .chart-container {
+            padding: 30px;
+            background: white;
+        }
+
+        .chart-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .chart-header h2 {
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #dc3545;
+        }
+
+        .last-updated {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .region-selector {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .region-selector label {
+            margin-right: 15px;
+            font-weight: 500;
+        }
+
+        .region-selector input[type="checkbox"] {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Azure Spot Node Price Tracker</h1>
+            <p>Real-time monitoring of Azure Standard_D16s_v5 Spot instance pricing</p>
+        </div>
+
+        <div id="loading" class="loading">
+            <h3>Loading price data...</h3>
+        </div>
+
+        <div id="error" class="error" style="display: none;">
+            <h3>Error loading data</h3>
+            <p id="error-message"></p>
+        </div>
+
+        <div id="content" style="display: none;">
+            <div class="stats-grid" id="stats-grid">
+                <!-- Stats will be populated by JavaScript -->
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2>Price History</h2>
+                    <div class="region-selector" id="region-selector">
+                        <!-- Region checkboxes will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+
+            <div class="last-updated" id="last-updated">
+                <!-- Last updated time will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let chart;
+        let priceData = {};
+
+        async function loadData() {
+            try {
+                const response = await fetch('price-data.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                priceData = await response.json();
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+
+                renderStats();
+                renderRegionSelector();
+                renderChart();
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+            }
+        }
+
+        function renderStats() {
+            const statsGrid = document.getElementById('stats-grid');
+            statsGrid.innerHTML = '';
+
+            Object.keys(priceData.regions || {}).forEach(regionName => {
+                const region = priceData.regions[regionName];
+                const stats = region.stats;
+
+                const statCard = document.createElement('div');
+                statCard.className = 'stat-card';
+                statCard.innerHTML = `
+                    <h3>${region.displayName || regionName}</h3>
+                    <div class="stat-value">$${stats.current ? stats.current.toFixed(4) : 'N/A'}</div>
+                    <div class="stat-label">Current Price/Hour</div>
+                    <br>
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                        <div>
+                            <div style="font-weight: bold; color: #28a745;">$${stats.min ? stats.min.toFixed(4) : 'N/A'}</div>
+                            <div class="stat-label">Min</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: bold; color: #ffc107;">$${stats.avg ? stats.avg.toFixed(4) : 'N/A'}</div>
+                            <div class="stat-label">Avg</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: bold; color: #dc3545;">$${stats.max ? stats.max.toFixed(4) : 'N/A'}</div>
+                            <div class="stat-label">Max</div>
+                        </div>
+                    </div>
+                `;
+                statsGrid.appendChild(statCard);
+            });
+
+            // Last updated
+            const lastUpdated = document.getElementById('last-updated');
+            if (priceData.lastUpdated) {
+                const date = new Date(priceData.lastUpdated);
+                lastUpdated.textContent = `Last updated: ${date.toLocaleString()}`;
+            }
+        }
+
+        function renderRegionSelector() {
+            const selector = document.getElementById('region-selector');
+            selector.innerHTML = '<label>Show regions:</label>';
+
+            Object.keys(priceData.regions || {}).forEach(regionName => {
+                const region = priceData.regions[regionName];
+                const checkbox = document.createElement('label');
+                checkbox.innerHTML = `
+                    <input type="checkbox" value="${regionName}" checked onchange="updateChart()">
+                    ${region.displayName || regionName}
+                `;
+                selector.appendChild(checkbox);
+            });
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            const datasets = [];
+            const colors = ['#0078d4', '#dc3545', '#28a745', '#ffc107', '#6f42c1'];
+
+            Object.keys(priceData.regions || {}).forEach((regionName, index) => {
+                const region = priceData.regions[regionName];
+
+                datasets.push({
+                    label: region.displayName || regionName,
+                    data: region.data.map(point => ({
+                        x: new Date(point.timestamp),
+                        y: point.retailPrice
+                    })),
+                    borderColor: colors[index % colors.length],
+                    backgroundColor: colors[index % colors.length] + '20',
+                    fill: false,
+                    tension: 0.1
+                });
+            });
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: { datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Azure Spot Instance Pricing Over Time'
+                        },
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                displayFormats: {
+                                    minute: 'HH:mm',
+                                    hour: 'HH:mm',
+                                    day: 'MMM DD'
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Price (USD/Hour)'
+                            },
+                            beginAtZero: false
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    }
+                }
+            });
+        }
+
+        function updateChart() {
+            const checkboxes = document.querySelectorAll('#region-selector input[type="checkbox"]');
+            const visibleRegions = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+
+            chart.data.datasets.forEach((dataset, index) => {
+                const regionName = Object.keys(priceData.regions)[index];
+                dataset.hidden = !visibleRegions.includes(regionName);
+            });
+
+            chart.update();
+        }
+
+        // Auto-refresh data every 5 minutes
+        setInterval(loadData, 5 * 60 * 1000);
+
+        // Load initial data
+        loadData();
+    </script>
+</body>
+</html>
