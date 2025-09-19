@@ -3,10 +3,11 @@ name: Update Price Data Visualization
 on:
   schedule:
     - cron: '*/5 * * * *'  # Every 5 minutes
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write   # <-- must be write to push to gh-pages
+  # The two below aren't required for peaceiris, but harmless if kept:
   pages: write
   id-token: write
 
@@ -15,31 +16,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-    - name: Process price data
-      run: |
-        # Create docs directory for GitHub Pages
-        mkdir -p docs
+      - name: Process price data
+        run: |
+          mkdir -p docs
+          if [ -f "data/price-logs.json" ]; then
+            echo "Processing existing price data..."
+            node scripts/process-data.js
+          else
+            echo "No price data found, creating empty dataset..."
+            echo "[]" > docs/price-data.json
+          fi
 
-        # Check if data exists
-        if [ -f "data/price-logs.json" ]; then
-          echo "Processing existing price data..."
-          node scripts/process-data.js
-        else
-          echo "No price data found, creating empty dataset..."
-          echo "[]" > docs/price-data.json
-        fi
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
-        publish_branch: gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
