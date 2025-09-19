@@ -176,6 +176,8 @@ class AzureSpotPriceChecker {
 
     for (const region of REGIONS) {
       const priceData = await this.fetchPriceData(region.name);
+      console.log(`Raw price data for ${region.name}:`, priceData);
+
       if (priceData) {
         results.regions[region.name] = priceData;
         console.log(`✅ ${region.displayName}: $${priceData.retailPrice}/hour`);
