@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-09-19T11:19:59.296Z",
+  "lastUpdated": "2025-09-19T11:28:33.055Z",
   "regions": {
     "eastus2": {
       "name": "eastus2",
@@ -556,14 +556,26 @@
           "retailPrice": 0.186931,
           "unitPrice": 0.186931,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:19:48.276Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:20:31.811Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 92,
+        "count": 94,
         "current": 0.186931,
         "min": 0.186931,
         "max": 0.186931,
-        "avg": 0.18693099999999993
+        "avg": 0.18693099999999996
       }
     },
     "northeurope": {
@@ -1121,22 +1133,34 @@
           "retailPrice": 0.221019,
           "unitPrice": 0.221019,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:19:48.276Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:20:31.811Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 92,
+        "count": 94,
         "current": 0.221019,
         "min": 0.221019,
         "max": 0.221019,
-        "avg": 0.2210189999999997
+        "avg": 0.22101899999999966
       }
     }
   },
   "summary": {
-    "totalEntries": 92,
+    "totalEntries": 94,
     "dateRange": {
       "start": "2025-09-19T09:45:08.826Z",
-      "end": "2025-09-19T11:18:53.360Z"
+      "end": "2025-09-19T11:20:31.811Z"
     }
   }
 }
