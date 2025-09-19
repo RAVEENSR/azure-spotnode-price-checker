@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-09-19T19:31:55.126Z",
+  "lastUpdated": "2025-09-19T19:39:57.837Z",
   "regions": {
     "eastus2": {
       "name": "eastus2",
@@ -2548,10 +2548,34 @@
           "retailPrice": 0.186931,
           "unitPrice": 0.186931,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:32:01.334Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:33:36.075Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:34:15.801Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:36:08.161Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 424,
+        "count": 428,
         "current": 0.186931,
         "min": 0.186931,
         "max": 0.186931,
@@ -5105,10 +5129,34 @@
           "retailPrice": 0.221019,
           "unitPrice": 0.221019,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:32:01.334Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:33:36.075Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:34:15.801Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:36:08.161Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 424,
+        "count": 428,
         "current": 0.221019,
         "min": 0.221019,
         "max": 0.221019,
@@ -5117,10 +5165,10 @@
     }
   },
   "summary": {
-    "totalEntries": 424,
+    "totalEntries": 428,
     "dateRange": {
       "start": "2025-09-19T09:45:08.826Z",
-      "end": "2025-09-19T19:27:53.005Z"
+      "end": "2025-09-19T19:36:08.161Z"
     }
   }
 }
