@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-09-19T10:29:19.036Z",
+  "lastUpdated": "2025-09-19T10:33:19.631Z",
   "regions": {
     "eastus2": {
       "name": "eastus2",
@@ -268,14 +268,38 @@
           "retailPrice": 0.186931,
           "unitPrice": 0.186931,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T10:29:06.968Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T10:30:09.111Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T10:31:05.609Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T10:32:04.764Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 44,
+        "count": 48,
         "current": 0.186931,
         "min": 0.186931,
         "max": 0.186931,
-        "avg": 0.18693100000000015
+        "avg": 0.1869310000000001
       }
     },
     "northeurope": {
@@ -545,10 +569,34 @@
           "retailPrice": 0.221019,
           "unitPrice": 0.221019,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T10:29:06.968Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T10:30:09.111Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T10:31:05.609Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T10:32:04.764Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 44,
+        "count": 48,
         "current": 0.221019,
         "min": 0.221019,
         "max": 0.221019,
@@ -557,10 +605,10 @@
     }
   },
   "summary": {
-    "totalEntries": 44,
+    "totalEntries": 48,
     "dateRange": {
       "start": "2025-09-19T09:45:08.826Z",
-      "end": "2025-09-19T10:28:06.374Z"
+      "end": "2025-09-19T10:32:04.764Z"
     }
   }
 }
