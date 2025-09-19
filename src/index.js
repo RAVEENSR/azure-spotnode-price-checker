@@ -31,13 +31,18 @@ class AzureSpotPriceChecker {
   async ensureDataDirectory() {
     try {
       await fs.access(this.dataDir);
-      console.log(`Data directory exists: ${this.dataDir}`);
+      console.log(`📁 Data directory exists: ${this.dataDir}`);
     } catch (error) {
-      console.log(`Creating data directory: ${this.dataDir}`);
+      console.log(`📁 Creating data directory: ${this.dataDir}`);
       try {
         await fs.mkdir(this.dataDir, { recursive: true });
         console.log(`✅ Data directory created successfully`);
       } catch (mkdirError) {
+        if (mkdirError.code === 'EROFS') {
+          console.log(`📱 Read-only filesystem, skipping directory creation`);
+          // Don't throw error for read-only filesystem
+          return;
+        }
         console.error(`❌ Failed to create data directory:`, mkdirError.message);
         throw mkdirError;
       }
@@ -146,12 +151,18 @@ class AzureSpotPriceChecker {
   }
 
   async saveData(newData) {
-    await this.ensureDataDirectory();
-
-    // For local development/testing, save just the current entry
-    // In production, GitHub persistence handles the accumulation
-    await fs.writeFile(this.logFile, JSON.stringify([newData], null, 2));
-    console.log(`Data saved locally for current run`);
+    // Try to save locally if filesystem is writable (development mode)
+    try {
+      await this.ensureDataDirectory();
+      await fs.writeFile(this.logFile, JSON.stringify([newData], null, 2));
+      console.log(`📁 Data saved locally for current run`);
+    } catch (error) {
+      if (error.code === 'EROFS') {
+        console.log(`📱 Read-only filesystem detected, skipping local save (using GitHub only)`);
+      } else {
+        console.warn(`⚠️ Could not save locally: ${error.message}`);
+      }
+    }
   }
 
   async run() {
