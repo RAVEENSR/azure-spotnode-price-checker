@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-09-19T11:36:48.825Z",
+  "lastUpdated": "2025-09-19T11:44:14.210Z",
   "regions": {
     "eastus2": {
       "name": "eastus2",
@@ -598,14 +598,32 @@
           "retailPrice": 0.186931,
           "unitPrice": 0.186931,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:41:00.062Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:43:20.085Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:43:34.483Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 99,
+        "count": 102,
         "current": 0.186931,
         "min": 0.186931,
         "max": 0.186931,
-        "avg": 0.18693100000000004
+        "avg": 0.18693100000000007
       }
     },
     "northeurope": {
@@ -1205,22 +1223,40 @@
           "retailPrice": 0.221019,
           "unitPrice": 0.221019,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:41:00.062Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:43:20.085Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T11:43:34.483Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 99,
+        "count": 102,
         "current": 0.221019,
         "min": 0.221019,
         "max": 0.221019,
-        "avg": 0.2210189999999996
+        "avg": 0.22101899999999955
       }
     }
   },
   "summary": {
-    "totalEntries": 99,
+    "totalEntries": 102,
     "dateRange": {
       "start": "2025-09-19T09:45:08.826Z",
-      "end": "2025-09-19T11:36:06.742Z"
+      "end": "2025-09-19T11:43:34.483Z"
     }
   }
 }
