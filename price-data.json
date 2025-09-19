@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-09-19T19:54:48.813Z",
+  "lastUpdated": "2025-09-19T20:04:25.970Z",
   "regions": {
     "eastus2": {
       "name": "eastus2",
@@ -2602,10 +2602,22 @@
           "retailPrice": 0.186931,
           "unitPrice": 0.186931,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:55:04.477Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:58:04.048Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 433,
+        "count": 435,
         "current": 0.186931,
         "min": 0.186931,
         "max": 0.186931,
@@ -5213,10 +5225,22 @@
           "retailPrice": 0.221019,
           "unitPrice": 0.221019,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:55:04.477Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-19T19:58:04.048Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 433,
+        "count": 435,
         "current": 0.221019,
         "min": 0.221019,
         "max": 0.221019,
@@ -5225,10 +5249,10 @@
     }
   },
   "summary": {
-    "totalEntries": 433,
+    "totalEntries": 435,
     "dateRange": {
       "start": "2025-09-19T09:45:08.826Z",
-      "end": "2025-09-19T19:52:38.998Z"
+      "end": "2025-09-19T19:58:04.048Z"
     }
   }
 }
