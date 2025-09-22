@@ -259,7 +259,7 @@ class AzureSpotPriceChecker {
           'Accept': 'application/vnd.github.v3+json',
           'User-Agent': 'Azure-Spot-Price-Checker/1.0'
         },
-        timeout: 15000
+        timeout: 120000
       });
 
       console.log(`✅ Successfully pushed ${allData.length} entries to GitHub`);
