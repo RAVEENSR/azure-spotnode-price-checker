@@ -168,32 +168,55 @@ class AzureSpotPriceChecker {
   async run() {
     console.log('=== Azure Spot Price Checker Started ===');
     console.log(`Timestamp: ${new Date().toISOString()}`);
+    console.log('Collecting data for 4 minutes with 30-second intervals...');
 
-    const results = {
-      timestamp: new Date().toISOString(),
-      regions: {}
-    };
+    const allResults = [];
+    const totalDuration = 4 * 60 * 1000; // 4 minutes
+    const interval = 30 * 1000; // 30 seconds
+    const iterations = Math.floor(totalDuration / interval); // 8 iterations
 
-    for (const region of REGIONS) {
-      const priceData = await this.fetchPriceData(region.name);
-      console.log(`Raw price data for ${region.name}:`, priceData);
+    for (let i = 0; i < iterations; i++) {
+      const iterationStart = Date.now();
+      console.log(`\n--- Data Collection ${i + 1}/${iterations} ---`);
 
-      if (priceData) {
-        results.regions[region.name] = priceData;
-        console.log(`✅ ${region.displayName}: $${priceData.retailPrice}/hour`);
-      } else {
-        console.log(`❌ ${region.displayName}: Failed to fetch data`);
+      const results = {
+        timestamp: new Date().toISOString(),
+        regions: {}
+      };
+
+      for (const region of REGIONS) {
+        const priceData = await this.fetchPriceData(region.name);
+        console.log(`Raw price data for ${region.name}:`, priceData);
+
+        if (priceData) {
+          results.regions[region.name] = priceData;
+          console.log(`✅ ${region.displayName}: $${priceData.retailPrice}/hour`);
+        } else {
+          console.log(`❌ ${region.displayName}: Failed to fetch data`);
+        }
+
+        // Small delay between region requests
+        await new Promise(resolve => setTimeout(resolve, 1000));
       }
 
-      // Small delay between requests to be respectful to the API
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      allResults.push(results);
+      await this.saveData(results); // Save locally for current iteration
+
+      // Wait for the remaining time in this 30-second interval
+      const iterationTime = Date.now() - iterationStart;
+      const remainingTime = interval - iterationTime;
+
+      if (remainingTime > 0 && i < iterations - 1) {
+        console.log(`Waiting ${Math.round(remainingTime/1000)} seconds until next collection...`);
+        await new Promise(resolve => setTimeout(resolve, remainingTime));
+      }
     }
 
-    // Load existing data, add new data, save locally, and push to GitHub
-    const existingData = await this.loadExistingData();
-    existingData.push(results);
+    console.log(`\n=== Collected ${allResults.length} data points over 4 minutes ===`);
 
-    await this.saveData(results); // Save locally for this run
+    // Load existing data and append all new results
+    const existingData = await this.loadExistingData();
+    existingData.push(...allResults);
 
     // Push complete dataset to GitHub for persistence
     await this.pushToGitHub(existingData);
