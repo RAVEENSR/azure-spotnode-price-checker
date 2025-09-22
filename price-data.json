@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-09-22T05:51:39.682Z",
+  "lastUpdated": "2025-09-22T05:59:08.830Z",
   "regions": {
     "eastus2": {
       "name": "eastus2",
@@ -3046,10 +3046,28 @@
           "retailPrice": 0.186931,
           "unitPrice": 0.186931,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-22T05:56:15.307Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-22T05:57:28.008Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-22T05:58:00.434Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 507,
+        "count": 510,
         "current": 0.186931,
         "min": 0.186931,
         "max": 0.186931,
@@ -6101,10 +6119,28 @@
           "retailPrice": 0.221019,
           "unitPrice": 0.221019,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-22T05:56:15.307Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-22T05:57:28.008Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-09-22T05:58:00.434Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 507,
+        "count": 510,
         "current": 0.221019,
         "min": 0.221019,
         "max": 0.221019,
@@ -6113,10 +6149,10 @@
     }
   },
   "summary": {
-    "totalEntries": 507,
+    "totalEntries": 510,
     "dateRange": {
       "start": "2025-09-19T09:45:08.826Z",
-      "end": "2025-09-22T03:45:19.659Z"
+      "end": "2025-09-22T05:58:00.434Z"
     }
   }
 }
