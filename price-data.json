@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-10-02T21:50:20.407Z",
+  "lastUpdated": "2025-10-02T21:57:28.017Z",
   "regions": {
     "eastus2": {
       "name": "eastus2",
@@ -4300,14 +4300,110 @@
           "retailPrice": 0.186931,
           "unitPrice": 0.186931,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:46:39.334Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:47:09.354Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:47:39.379Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:48:09.386Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:48:39.410Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:49:09.414Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:49:39.434Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:50:09.458Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:50:52.748Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:51:22.766Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:51:52.791Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:52:22.807Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:52:52.834Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:53:22.846Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:53:52.871Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:54:22.898Z",
+          "retailPrice": 0.186931,
+          "unitPrice": 0.186931,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 716,
+        "count": 732,
         "current": 0.186931,
         "min": 0.186931,
         "max": 0.186931,
-        "avg": 0.18693100000000049
+        "avg": 0.1869310000000002
       }
     },
     "northeurope": {
@@ -8609,22 +8705,118 @@
           "retailPrice": 0.221019,
           "unitPrice": 0.221019,
           "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:46:39.334Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:47:09.354Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:47:39.379Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:48:09.386Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:48:39.410Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:49:09.414Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:49:39.434Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:50:09.458Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:50:52.748Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:51:22.766Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:51:52.791Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:52:22.807Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:52:52.834Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:53:22.846Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:53:52.871Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
+        },
+        {
+          "timestamp": "2025-10-02T21:54:22.898Z",
+          "retailPrice": 0.221019,
+          "unitPrice": 0.221019,
+          "currencyCode": "USD"
         }
       ],
       "stats": {
-        "count": 716,
+        "count": 732,
         "current": 0.221019,
         "min": 0.221019,
         "max": 0.221019,
-        "avg": 0.2210190000000012
+        "avg": 0.22101900000000144
       }
     }
   },
   "summary": {
-    "totalEntries": 716,
+    "totalEntries": 732,
     "dateRange": {
       "start": "2025-09-19T09:45:08.826Z",
-      "end": "2025-10-02T21:45:57.366Z"
+      "end": "2025-10-02T21:54:22.898Z"
     }
   }
 }
