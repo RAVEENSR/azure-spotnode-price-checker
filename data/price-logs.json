@@ -30119,5 +30119,221 @@
         "skuName": "Standard_D16s_v5 Spot"
       }
     }
+  },
+  {
+    "timestamp": "2025-10-09T23:56:00.136Z",
+    "regions": {
+      "eastus2": {
+        "region": "eastus2",
+        "timestamp": "2025-10-09T23:56:00.527Z",
+        "retailPrice": 0.205594,
+        "unitPrice": 0.205594,
+        "currencyCode": "USD",
+        "location": "US East 2",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      },
+      "northeurope": {
+        "region": "northeurope",
+        "timestamp": "2025-10-09T23:56:01.848Z",
+        "retailPrice": 0.232062,
+        "unitPrice": 0.232062,
+        "currencyCode": "USD",
+        "location": "EU North",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-09T23:56:30.149Z",
+    "regions": {
+      "eastus2": {
+        "region": "eastus2",
+        "timestamp": "2025-10-09T23:56:30.384Z",
+        "retailPrice": 0.205594,
+        "unitPrice": 0.205594,
+        "currencyCode": "USD",
+        "location": "US East 2",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      },
+      "northeurope": {
+        "region": "northeurope",
+        "timestamp": "2025-10-09T23:56:31.602Z",
+        "retailPrice": 0.232062,
+        "unitPrice": 0.232062,
+        "currencyCode": "USD",
+        "location": "EU North",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-09T23:57:00.176Z",
+    "regions": {
+      "eastus2": {
+        "region": "eastus2",
+        "timestamp": "2025-10-09T23:57:00.399Z",
+        "retailPrice": 0.205594,
+        "unitPrice": 0.205594,
+        "currencyCode": "USD",
+        "location": "US East 2",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      },
+      "northeurope": {
+        "region": "northeurope",
+        "timestamp": "2025-10-09T23:57:01.643Z",
+        "retailPrice": 0.232062,
+        "unitPrice": 0.232062,
+        "currencyCode": "USD",
+        "location": "EU North",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-09T23:57:30.204Z",
+    "regions": {
+      "eastus2": {
+        "region": "eastus2",
+        "timestamp": "2025-10-09T23:57:30.425Z",
+        "retailPrice": 0.205594,
+        "unitPrice": 0.205594,
+        "currencyCode": "USD",
+        "location": "US East 2",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      },
+      "northeurope": {
+        "region": "northeurope",
+        "timestamp": "2025-10-09T23:57:31.763Z",
+        "retailPrice": 0.232062,
+        "unitPrice": 0.232062,
+        "currencyCode": "USD",
+        "location": "EU North",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-09T23:58:00.232Z",
+    "regions": {
+      "eastus2": {
+        "region": "eastus2",
+        "timestamp": "2025-10-09T23:58:00.447Z",
+        "retailPrice": 0.205594,
+        "unitPrice": 0.205594,
+        "currencyCode": "USD",
+        "location": "US East 2",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      },
+      "northeurope": {
+        "region": "northeurope",
+        "timestamp": "2025-10-09T23:58:01.928Z",
+        "retailPrice": 0.232062,
+        "unitPrice": 0.232062,
+        "currencyCode": "USD",
+        "location": "EU North",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-09T23:58:30.256Z",
+    "regions": {
+      "eastus2": {
+        "region": "eastus2",
+        "timestamp": "2025-10-09T23:58:30.498Z",
+        "retailPrice": 0.205594,
+        "unitPrice": 0.205594,
+        "currencyCode": "USD",
+        "location": "US East 2",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      },
+      "northeurope": {
+        "region": "northeurope",
+        "timestamp": "2025-10-09T23:58:31.696Z",
+        "retailPrice": 0.232062,
+        "unitPrice": 0.232062,
+        "currencyCode": "USD",
+        "location": "EU North",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-09T23:59:00.282Z",
+    "regions": {
+      "eastus2": {
+        "region": "eastus2",
+        "timestamp": "2025-10-09T23:59:00.546Z",
+        "retailPrice": 0.205594,
+        "unitPrice": 0.205594,
+        "currencyCode": "USD",
+        "location": "US East 2",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      },
+      "northeurope": {
+        "region": "northeurope",
+        "timestamp": "2025-10-09T23:59:01.760Z",
+        "retailPrice": 0.232062,
+        "unitPrice": 0.232062,
+        "currencyCode": "USD",
+        "location": "EU North",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-09T23:59:30.308Z",
+    "regions": {
+      "eastus2": {
+        "region": "eastus2",
+        "timestamp": "2025-10-09T23:59:30.539Z",
+        "retailPrice": 0.205594,
+        "unitPrice": 0.205594,
+        "currencyCode": "USD",
+        "location": "US East 2",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      },
+      "northeurope": {
+        "region": "northeurope",
+        "timestamp": "2025-10-09T23:59:31.755Z",
+        "retailPrice": 0.232062,
+        "unitPrice": 0.232062,
+        "currencyCode": "USD",
+        "location": "EU North",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "meterName": "D16s v5 Spot",
+        "skuName": "Standard_D16s_v5 Spot"
+      }
+    }
   }
 ]
